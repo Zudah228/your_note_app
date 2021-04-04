@@ -24,7 +24,9 @@ class YourNoteApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: const Color(0xFF47B0D1),
+          primaryColorBrightness: Brightness.dark,
+          brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: routes,

@@ -54,6 +54,9 @@ class CreateAccountPage extends StatelessWidget {
                     await Navigator.pushNamed(context, AppRoutes.home);
                   }
                 },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).primaryColor)),
                 child: const Text('登録'))
           ],
         ),

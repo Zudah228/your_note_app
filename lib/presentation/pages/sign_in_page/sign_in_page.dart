@@ -43,6 +43,9 @@ class SignInPage extends StatelessWidget {
                   _auth.signInWithEmailAndPassword(_viewModel.email,
                       _viewModel.password, context, AppRoutes.home);
                 },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).primaryColor)),
                 child: const Text('サインイン')),
             const SizedBox(
               height: 30,
@@ -51,6 +54,9 @@ class SignInPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, AppRoutes.createAccount);
                 },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).primaryColor)),
                 child: const Text('アカウントを持っていない方はこちら'))
           ],
         ),
