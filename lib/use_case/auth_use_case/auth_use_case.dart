@@ -31,17 +31,18 @@ class AuthUseCaseNotifier extends StateNotifier<AuthUseCaseState>
     }
   }
 
-  Future<void> createUserWithEmailAndPassword(String email, String password,
-      BuildContext context, String navigatingRouteName) async {
+  Future<String> createUserWithEmailAndPassword(String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      final uid = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       print('completely created');
-      await Navigator.pushNamed(context, navigatingRouteName);
+      return uid;
     } on FirebaseAuthException catch (e) {
       print(e);
+      return 'failed to create account';
     } on Exception catch (e) {
       print(e);
+      return 'failed to create account';
     }
   }
 }

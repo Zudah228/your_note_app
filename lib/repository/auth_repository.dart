@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 abstract class AuthRepository {
   User currentUser;
 
-  Future<void> createUserWithEmailAndPassword({
+  Future<String> createUserWithEmailAndPassword({
     @required String email,
     @required String password,
   });
@@ -14,4 +14,6 @@ abstract class AuthRepository {
     @required String email,
     @required String password,
   });
+
+  Future<void> signOut();
 }

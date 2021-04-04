@@ -11,8 +11,10 @@ class DatabaseDataSource implements DatabaseRepository {
   final _fireStore = FirebaseFirestore.instance;
 
   @override
-  Stream<DocumentSnapshot> get currentUserData =>
-      _fireStore.collection('users').doc(fb_auth.FirebaseAuth.instance.currentUser.uid).snapshots();
+  Stream<DocumentSnapshot> get currentUserData => _fireStore
+      .collection('users')
+      .doc(fb_auth.FirebaseAuth.instance.currentUser.uid)
+      .snapshots();
 
   @override
   Stream<QuerySnapshot> get notesStream =>
@@ -20,16 +22,14 @@ class DatabaseDataSource implements DatabaseRepository {
 
   @override
   Future<bool> hasSignedIn(String uid) async {
-    final userList = await _fireStore
-        .collection('users')
-        .get()
-        .then((value) => value.docs.map((doc) => User.fromDocument(doc).uid).toList());
+    final userList = await _fireStore.collection('users').get().then((value) =>
+        value.docs.map((doc) => User.fromDocument(doc).uid).toList());
     print('successfully get uid List from Firestore');
     return userList.contains(uid);
   }
 
   @override
-  Future<void> addUser(User user, String uid) async {
+  Future<void> addUser(String uid, User user) async {
     await _fireStore.collection('users').doc(uid).set(user.toMap());
   }
 
@@ -40,11 +40,22 @@ class DatabaseDataSource implements DatabaseRepository {
 
   // Noteの追加
   @override
-  Future<void> setNote(Note note) async {
+  Future<void> setNote(String uid, Note note) async {
     if (note.id == null) {
-      return _fireStore.collection('items').add(note.toMap());
+      await _fireStore
+          .collection('users')
+          .doc(uid)
+          .collection('notes')
+          .add(note.toMap());
+      print('add document to Firestore');
     } else {
-      return _fireStore.collection('items').doc(note.id).set(note.toMap());
+      await _fireStore
+          .collection('users')
+          .doc(uid)
+          .collection('notes')
+          .doc(note.id)
+          .set(note.toMap());
+      print('update document in Firestore');
     }
   }
 

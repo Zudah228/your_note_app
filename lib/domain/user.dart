@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class User {
   User({
     @required this.uid,
-    @required this.name,
+    this.name,
     @required this.email,
-    @required this.iconURL,
+    this.iconURL,
     @required this.createAt,
   });
   User.fromDocument(DocumentSnapshot document) {

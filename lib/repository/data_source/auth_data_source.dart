@@ -19,20 +19,28 @@ class AuthDataSource implements AuthRepository {
   User currentUser = FirebaseAuth.instance.currentUser;
 
   // アカウントの作成
-  // TODO(me): エラーコードのをUIに昇華
+  // TODO(me): エラーコードをUIに昇華
   @override
-  Future<void> createUserWithEmailAndPassword(
+  Future<String> createUserWithEmailAndPassword(
       {@required String email, @required String password}) async {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      return _auth.createUserWithEmailAndPassword(
+          email: email, password: password).then((UserCredential credential) => credential.user.uid);
+
   }
 
   // サインイン
-  // TODO(me): エラーコードのをUIに昇華
+  // TODO(me): エラーコードをUIに昇華
   @override
   Future<void> signInWithEmailAndPassword(
       {@required String email, @required String password}) async {
       await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+  }
+
+  // サインアウト
+  @override
+  Future<void> signOut() async {
+    await _auth.signOut();
+    print('completely signed out');
   }
 }

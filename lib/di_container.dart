@@ -25,5 +25,8 @@ List<SingleChildWidget> get useCaseProviders {
     StateNotifierProvider<AuthUseCaseNotifier,AuthUseCaseState>(
       create: (context) => AuthUseCaseNotifier(),
     ),
+    StateNotifierProvider<DatabaseUseCaseNotifier,DatabaseUseCaseState>(
+      create: (context) => DatabaseUseCaseNotifier(),
+    ),
   ];
 }

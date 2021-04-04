@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:yournoteapp/common/show_alert_dialog/show_alert_dialog.dart';
+import 'package:yournoteapp/repository/auth_repository.dart';
+import 'package:yournoteapp/use_case/database_use_case/database_use_case.dart';
 
 import 'note_writing_page_state.dart';
 
@@ -22,6 +24,7 @@ class NoteWritingPage extends StatelessWidget {
     // TODO(me): タイトル、タグ、内容を入力する場所
     // TODO(me): セキュリティルールを利用して追加
     final _viewModel = _ViewModel.fromStateNotifier(context);
+    final _uid = context.read<AuthRepository>().currentUser.uid;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       onPanDown: (_) => FocusScope.of(context).unfocus(),
@@ -38,15 +41,16 @@ class NoteWritingPage extends StatelessWidget {
               const SizedBox(
                 width: 20,
               ),
-              _CancelButton(
-                isChanged: _viewModel.isChanged,
-              )
+              _CancelButton(isChanged: _viewModel.isChanged)
             ],
           ),
           leadingWidth: 100,
           actions: [
-            _SavedButton(
+            _SaveButton(
               isChanged: _viewModel.isChanged,
+              uid: _uid,
+              title: _viewModel.title,
+              description: _viewModel.description,
             ),
             const SizedBox(
               width: 20,
@@ -55,8 +59,7 @@ class NoteWritingPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
-          child: Expanded(
-              child: Column(
+          child: Column(
             children: [
               TextField(
                 maxLines: 1,
@@ -74,21 +77,27 @@ class NoteWritingPage extends StatelessWidget {
                 onChanged: _viewModel.descriptionOnChanged,
               ),
             ],
-          )),
+          ),
         ),
       ),
     );
   }
 }
 
-class _SavedButton extends StatelessWidget {
-  const _SavedButton({Key key, this.isChanged}) : super(key: key);
+class _SaveButton extends StatelessWidget {
+  const _SaveButton(
+      {Key key, this.isChanged, this.uid, this.title, this.description})
+      : super(key: key);
+
   final bool isChanged;
+  final String uid;
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: ElevatedButton(
+        child: TextButton(
             style: ButtonStyle(
               shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
@@ -100,7 +109,14 @@ class _SavedButton extends StatelessWidget {
                       Theme.of(context).primaryColor)
                   : MaterialStateProperty.all<Color>(Colors.white),
             ),
-            onPressed: isChanged ? () {} : null,
+            onPressed: isChanged
+                ? () async {
+                    await context
+                        .read<DatabaseUseCaseNotifier>()
+                        .setNote(uid, title, description);
+                    Navigator.pop(context);
+                  }
+                : null,
             child: Text(
               '保存',
               style: TextStyle(color: isChanged ? Colors.white : Colors.blue),
@@ -132,17 +148,24 @@ class _CancelButton extends StatelessWidget {
 }
 
 class _ViewModel {
-  _ViewModel(this.isChanged, this.titleOnChanged, this.descriptionOnChanged);
+  _ViewModel(this.isChanged, this.titleOnChanged, this.descriptionOnChanged,
+      this.title, this.description);
 
   _ViewModel.fromStateNotifier(BuildContext context)
       : isChanged = context
             .select<NoteWritingPageState, bool>((state) => state.isChanged),
+        title = context
+            .select<NoteWritingPageState, String>((state) => state.title),
+        description = context
+            .select<NoteWritingPageState, String>((state) => state.description),
         titleOnChanged =
             context.watch<NoteWritingPageNotifier>().titleOnChanged,
         descriptionOnChanged =
             context.watch<NoteWritingPageNotifier>().descriptionOnChanged;
 
   final bool isChanged;
+  final String title;
+  final String description;
   final Function(String) titleOnChanged;
   final Function(String) descriptionOnChanged;
 }
