@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "425321571205",
+    "project_id": "your-note-f9fc8",
+    "storage_bucket": "your-note-f9fc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425321571205:android:f4e604bd4c385aef6adaec",
+        "android_client_info": {
+          "package_name": "com.zudah.yourNoteApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425321571205-33fskt8jgcec5fufaape30hq3nbhck3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv1oqDxevKcPeWqtpXx5J1F8pUs41zM14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425321571205-33fskt8jgcec5fufaape30hq3nbhck3k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "425321571205-egofn40rto4g5ena6lamhnsi5n7ht399.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zudah.yourNoteApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
