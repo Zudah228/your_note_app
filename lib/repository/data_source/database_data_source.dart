@@ -17,8 +17,11 @@ class DatabaseDataSource implements DatabaseRepository {
       .snapshots();
 
   @override
-  Stream<QuerySnapshot> get notesStream =>
-      _fireStore.collection('notes').snapshots();
+  Stream<QuerySnapshot> get notesStream => _fireStore
+      .collection('users')
+      .doc(fb_auth.FirebaseAuth.instance.currentUser.uid)
+      .collection('notes')
+      .snapshots();
 
   @override
   Future<bool> hasSignedIn(String uid) async {
