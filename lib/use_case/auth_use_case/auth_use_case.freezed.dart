@@ -106,7 +106,7 @@ class _$_AuthUseCaseState  implements _AuthUseCaseState {
 
   
 
-@JsonKey(defaultValue: User) @override  final User currentUser;
+@JsonKey(defaultValue: null) @override  final User currentUser;
 
 @override
 String toString() {

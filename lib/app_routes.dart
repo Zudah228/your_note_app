@@ -16,7 +16,7 @@ mixin AppRoutes {
       case home:
         return HomePage.wrapped();
       case noteWriting:
-        return NoteWritingPage();
+        return NoteWritingPage.wrapped();
       case createAccount:
         return CreateAccountPage.wrapped();
       default:

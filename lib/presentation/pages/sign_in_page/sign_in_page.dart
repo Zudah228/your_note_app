@@ -3,7 +3,6 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:yournoteapp/app_routes.dart';
 import 'package:yournoteapp/presentation/pages/sign_in_page/sign_in_page_state.dart';
-import 'package:yournoteapp/repository/auth_repository.dart';
 import 'package:yournoteapp/use_case/auth_use_case/auth_use_case.dart';
 
 class SignInPage extends StatelessWidget {
@@ -41,8 +40,8 @@ class SignInPage extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                    _auth.signInWithEmailAndPassword(_viewModel.email,
-                        _viewModel.password, context, AppRoutes.home);
+                  _auth.signInWithEmailAndPassword(_viewModel.email,
+                      _viewModel.password, context, AppRoutes.home);
                 },
                 child: const Text('サインイン')),
             const SizedBox(
