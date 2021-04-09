@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError('It seems like you constru
 class _$SignInPageStateTearOff {
   const _$SignInPageStateTearOff();
 
-_SignInPageState call({ String email = '',  String password = ''}) {
-  return  _SignInPageState(email:email,password:password,);
+_SignInPageState call({ String email = '',  String password = '',  String iconURL = '',  bool obscurePasswordText = true}) {
+  return  _SignInPageState(email:email,password:password,iconURL:iconURL,obscurePasswordText:obscurePasswordText,);
 }
 
 }
@@ -28,7 +28,7 @@ const $SignInPageState = _$SignInPageStateTearOff();
 /// @nodoc
 mixin _$SignInPageState {
 
- String get email => throw _privateConstructorUsedError; String get password => throw _privateConstructorUsedError;
+ String get email => throw _privateConstructorUsedError; String get password => throw _privateConstructorUsedError; String get iconURL => throw _privateConstructorUsedError; bool get obscurePasswordText => throw _privateConstructorUsedError;
 
 
 
@@ -44,7 +44,7 @@ $SignInPageStateCopyWith<SignInPageState> get copyWith => throw _privateConstruc
 abstract class $SignInPageStateCopyWith<$Res>  {
   factory $SignInPageStateCopyWith(SignInPageState value, $Res Function(SignInPageState) then) = _$SignInPageStateCopyWithImpl<$Res>;
 $Res call({
- String email, String password
+ String email, String password, String iconURL, bool obscurePasswordText
 });
 
 
@@ -59,11 +59,13 @@ class _$SignInPageStateCopyWithImpl<$Res> implements $SignInPageStateCopyWith<$R
   // ignore: unused_field
   final $Res Function(SignInPageState) _then;
 
-@override $Res call({Object email = freezed,Object password = freezed,}) {
+@override $Res call({Object email = freezed,Object password = freezed,Object iconURL = freezed,Object obscurePasswordText = freezed,}) {
   return _then(_value.copyWith(
 email: email == freezed ? _value.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: password == freezed ? _value.password : password // ignore: cast_nullable_to_non_nullable
-as String,
+as String,iconURL: iconURL == freezed ? _value.iconURL : iconURL // ignore: cast_nullable_to_non_nullable
+as String,obscurePasswordText: obscurePasswordText == freezed ? _value.obscurePasswordText : obscurePasswordText // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -74,7 +76,7 @@ as String,
 abstract class _$SignInPageStateCopyWith<$Res> implements $SignInPageStateCopyWith<$Res> {
   factory _$SignInPageStateCopyWith(_SignInPageState value, $Res Function(_SignInPageState) then) = __$SignInPageStateCopyWithImpl<$Res>;
 @override $Res call({
- String email, String password
+ String email, String password, String iconURL, bool obscurePasswordText
 });
 
 
@@ -89,11 +91,13 @@ class __$SignInPageStateCopyWithImpl<$Res> extends _$SignInPageStateCopyWithImpl
 @override
 _SignInPageState get _value => super._value as _SignInPageState;
 
-@override $Res call({Object email = freezed,Object password = freezed,}) {
+@override $Res call({Object email = freezed,Object password = freezed,Object iconURL = freezed,Object obscurePasswordText = freezed,}) {
   return _then(_SignInPageState(
 email: email == freezed ? _value.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: password == freezed ? _value.password : password // ignore: cast_nullable_to_non_nullable
-as String,
+as String,iconURL: iconURL == freezed ? _value.iconURL : iconURL // ignore: cast_nullable_to_non_nullable
+as String,obscurePasswordText: obscurePasswordText == freezed ? _value.obscurePasswordText : obscurePasswordText // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -104,25 +108,25 @@ as String,
 
 /// @nodoc
 class _$_SignInPageState  implements _SignInPageState {
-   _$_SignInPageState({this.email = '', this.password = ''});
+   _$_SignInPageState({this.email = '', this.password = '', this.iconURL = '', this.obscurePasswordText = true});
 
   
 
-@JsonKey(defaultValue: '') @override  final String email;@JsonKey(defaultValue: '') @override  final String password;
+@JsonKey(defaultValue: '') @override  final String email;@JsonKey(defaultValue: '') @override  final String password;@JsonKey(defaultValue: '') @override  final String iconURL;@JsonKey(defaultValue: true) @override  final bool obscurePasswordText;
 
 @override
 String toString() {
-  return 'SignInPageState(email: $email, password: $password)';
+  return 'SignInPageState(email: $email, password: $password, iconURL: $iconURL, obscurePasswordText: $obscurePasswordText)';
 }
 
 
 @override
 bool operator ==(dynamic other) {
-  return identical(this, other) || (other is _SignInPageState&&(identical(other.email, email) || const DeepCollectionEquality().equals(other.email, email))&&(identical(other.password, password) || const DeepCollectionEquality().equals(other.password, password)));
+  return identical(this, other) || (other is _SignInPageState&&(identical(other.email, email) || const DeepCollectionEquality().equals(other.email, email))&&(identical(other.password, password) || const DeepCollectionEquality().equals(other.password, password))&&(identical(other.iconURL, iconURL) || const DeepCollectionEquality().equals(other.iconURL, iconURL))&&(identical(other.obscurePasswordText, obscurePasswordText) || const DeepCollectionEquality().equals(other.obscurePasswordText, obscurePasswordText)));
 }
 
 @override
-int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(email)^ const DeepCollectionEquality().hash(password);
+int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(email)^ const DeepCollectionEquality().hash(password)^ const DeepCollectionEquality().hash(iconURL)^ const DeepCollectionEquality().hash(obscurePasswordText);
 
 @JsonKey(ignore: true)
 @override
@@ -137,12 +141,12 @@ _$SignInPageStateCopyWith<_SignInPageState> get copyWith => __$SignInPageStateCo
 
 
 abstract class _SignInPageState implements SignInPageState {
-   factory _SignInPageState({ String email,  String password}) = _$_SignInPageState;
+   factory _SignInPageState({ String email,  String password,  String iconURL,  bool obscurePasswordText}) = _$_SignInPageState;
   
 
   
 
-@override  String get email => throw _privateConstructorUsedError;@override  String get password => throw _privateConstructorUsedError;
+@override  String get email => throw _privateConstructorUsedError;@override  String get password => throw _privateConstructorUsedError;@override  String get iconURL => throw _privateConstructorUsedError;@override  bool get obscurePasswordText => throw _privateConstructorUsedError;
 @override @JsonKey(ignore: true)
 _$SignInPageStateCopyWith<_SignInPageState> get copyWith => throw _privateConstructorUsedError;
 

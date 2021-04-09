@@ -24,7 +24,6 @@ class NoteWritingPage extends StatelessWidget {
     // TODO(me): タイトル、タグ、内容を入力する場所
     // TODO(me): セキュリティルールを利用して追加
     final _viewModel = _ViewModel.fromStateNotifier(context);
-    final _uid = context.read<AuthRepository>().currentUser.uid;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       onPanDown: (_) => FocusScope.of(context).unfocus(),
@@ -48,7 +47,6 @@ class NoteWritingPage extends StatelessWidget {
           actions: [
             _SaveButton(
               isChanged: _viewModel.isChanged,
-              uid: _uid,
               title: _viewModel.title,
               description: _viewModel.description,
             ),
@@ -86,35 +84,35 @@ class NoteWritingPage extends StatelessWidget {
 
 class _SaveButton extends StatelessWidget {
   const _SaveButton(
-      {Key key, this.isChanged, this.uid, this.title, this.description})
+      {Key key, this.isChanged, this.title, this.description})
       : super(key: key);
 
   final bool isChanged;
-  final String uid;
   final String title;
   final String description;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final _uid = context.read<AuthRepository>().currentUser.uid;
     return Center(
         child: TextButton(
             style: ButtonStyle(
               shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
-                      side: BorderSide(color: Theme.of(context).primaryColor),
+                      side: BorderSide(color: theme.primaryColor),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(5)))),
               backgroundColor: isChanged
                   ? MaterialStateProperty.all<Color>(
-                      Theme.of(context).primaryColor)
+                      theme.primaryColor)
                   : MaterialStateProperty.all<Color>(Colors.white),
             ),
             onPressed: isChanged
                 ? () async {
                     await context
                         .read<DatabaseUseCaseNotifier>()
-                        .setNote(uid, title, description);
-                    Navigator.pop(context);
+                        .setNote(context, _uid, title, description);
                   }
                 : null,
             child: Text(

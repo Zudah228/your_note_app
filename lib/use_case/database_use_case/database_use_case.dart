@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_notifier/state_notifier.dart';
+import 'package:yournoteapp/common/index.dart';
 import 'package:yournoteapp/domain/index.dart';
 import 'package:yournoteapp/repository/index.dart';
 
@@ -17,7 +19,7 @@ class DatabaseUseCaseNotifier extends StateNotifier<DatabaseUseCaseState>
 
   DatabaseRepository get _database => read<DatabaseRepository>();
 
-  Future<void> addUser(String uid, String email, ) async {
+  Future<void> addUser(String uid, String email) async {
     await _database.addUser(uid, User(
       uid: uid,
       email: email,
@@ -26,7 +28,7 @@ class DatabaseUseCaseNotifier extends StateNotifier<DatabaseUseCaseState>
     print('add user profile to Firestore');
   }
 
-  Future<void> setNote(String uid, String title, String description) async {
+  Future<void> setNote(BuildContext context, String uid, String title, String description) async {
     try {
       await _database.setNote(
           uid,
@@ -34,7 +36,12 @@ class DatabaseUseCaseNotifier extends StateNotifier<DatabaseUseCaseState>
               title: title,
               description: description,
               updateAt: DateTime.now()));
+      Navigator.pop(context);
     } on FirebaseException catch (e) {
+      await showCommonDialog<void>(context, noteSaveErrorTitle, e.toString());
+      print(e);
+    } on Exception catch (e) {
+      await showCommonDialog<void>(context, title, e.toString());
       print(e);
     }
   }

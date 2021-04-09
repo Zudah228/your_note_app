@@ -1,0 +1,11 @@
+# This is a generated file; do not edit or check into version control.
+cloud_firestore=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-1.0.3/
+cloud_firestore_web=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-1.0.3/
+firebase_analytics=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_analytics-7.1.1/
+firebase_analytics_web=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_analytics_web-0.2.0+1/
+firebase_auth=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_auth-1.0.1/
+firebase_auth_web=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-1.0.3/
+firebase_core=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.0.2/
+firebase_core_web=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.0.2/
+firebase_storage=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_storage-8.0.1/
+firebase_storage_web=/Users/tsudayamato/.pub-cache/hosted/pub.dartlang.org/firebase_storage_web-1.0.2/

@@ -20,7 +20,7 @@ class YourNoteApp extends StatelessWidget {
       routes[name] = (context) => AppRoutes.callWidget(name);
     }
     return MultiProvider(
-      providers: [...repositoryProviders, ...useCaseProviders],
+      providers: [...repositoryProviders, ...useCaseProviders, ...commonProviders],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

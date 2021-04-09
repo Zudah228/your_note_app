@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _viewModel = _ViewModel.fromStateNotifier(context);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Note'),
@@ -58,6 +59,7 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.noteWriting),
+        backgroundColor: theme.primaryColor,
         child: const Icon(Icons.note_add),
       ),
     );

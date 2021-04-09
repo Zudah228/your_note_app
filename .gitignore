@@ -23,8 +23,7 @@
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
+firebase_security_rules/
 .packages
 .pub-cache/
 .pub/
@@ -41,3 +40,6 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# fvm
+.fvm/flutter_sdk
