@@ -22,10 +22,18 @@ class DatabaseDataSource implements DatabaseRepository {
       .doc(fb_auth.FirebaseAuth.instance.currentUser.uid)
       .collection('notes')
       .snapshots();
-  
+
   @override
-  Future<DocumentSnapshot> getAppData(String path){
-    return _fireStore.collection('app').doc(path).get();
+  Future<DocumentSnapshot> getAppData(String path) async {
+    try {
+      final appData = await _fireStore.collection('app').doc(path).get();
+      print('firestore: has got app data');
+      return appData;
+    } on FirebaseException catch (e) {
+      print('a');
+      print(e);
+      return null;
+    }
   }
 
   @override

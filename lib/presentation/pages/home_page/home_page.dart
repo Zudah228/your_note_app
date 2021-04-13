@@ -76,11 +76,14 @@ class _ListTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(note.title),
-          subtitle: Text(note.description.length <= 10
-              ? note.description
-              : '${note.description.substring(0, 20)}...'),
-        ),
+            title: Text(note.title == '' ? 'タイトルなし' : note.title),
+            subtitle: Text(
+              note.description.length >= 10
+                  ? '${note.description.substring(0, 20)}...'
+                  : note.description == ''
+                      ? '本文なし'
+                      : note.description,
+            )),
         const Divider(
           height: 2,
         ),

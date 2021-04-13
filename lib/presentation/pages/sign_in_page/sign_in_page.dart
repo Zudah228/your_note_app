@@ -36,7 +36,13 @@ class SignInPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: SizedBox(height: 200,width: 200,child: Image.asset('assets/images/app_icon.png',fit: BoxFit.contain,)),
+              child: SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    'assets/images/app_icon.png',
+                    fit: BoxFit.contain,
+                  )),
             ),
             _TextField(
               onChanged: _viewModel.emailOnChanged,
@@ -49,15 +55,17 @@ class SignInPage extends StatelessWidget {
               obscureText: _viewModel.obscurePasswordText,
               fieldName: 'password',
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             ElevatedButton(
                 onPressed: () {
                   _auth.signInWithEmailAndPassword(_viewModel.email,
                       _viewModel.password, context, AppRoutes.home);
                 },
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        theme.primaryColor)),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(theme.primaryColor)),
                 child: const Text('サインイン')),
             const SizedBox(
               height: 30,
