@@ -8,6 +8,7 @@ part 'create_account_page_state.freezed.dart';
 @freezed
 class CreateAccountPageState with _$CreateAccountPageState {
   factory CreateAccountPageState({
+    @Default('')String userName,
     @Default('')String email,
     @Default('')String password,
   }) = _CreateAccountPageState;
@@ -16,8 +17,11 @@ class CreateAccountPageState with _$CreateAccountPageState {
 class CreateAccountPageNotifier extends StateNotifier<CreateAccountPageState> {
   CreateAccountPageNotifier() : super(CreateAccountPageState());
 
+  void userNameOnChanged(String userName) {
+    state = state.copyWith(userName: userName);
+  }
   void emailOnChanged(String email) {
-    state = state.copyWith(email: email,);
+    state = state.copyWith(email: email);
   }
   void passwordOnChanged(String password) {
     state = state.copyWith(password: password);

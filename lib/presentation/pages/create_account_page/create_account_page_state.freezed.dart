@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError('It seems like you constru
 class _$CreateAccountPageStateTearOff {
   const _$CreateAccountPageStateTearOff();
 
-_CreateAccountPageState call({ String email = '',  String password = ''}) {
-  return  _CreateAccountPageState(email:email,password:password,);
+_CreateAccountPageState call({ String userName = '',  String email = '',  String password = ''}) {
+  return  _CreateAccountPageState(userName:userName,email:email,password:password,);
 }
 
 }
@@ -28,7 +28,7 @@ const $CreateAccountPageState = _$CreateAccountPageStateTearOff();
 /// @nodoc
 mixin _$CreateAccountPageState {
 
- String get email => throw _privateConstructorUsedError; String get password => throw _privateConstructorUsedError;
+ String get userName => throw _privateConstructorUsedError; String get email => throw _privateConstructorUsedError; String get password => throw _privateConstructorUsedError;
 
 
 
@@ -44,7 +44,7 @@ $CreateAccountPageStateCopyWith<CreateAccountPageState> get copyWith => throw _p
 abstract class $CreateAccountPageStateCopyWith<$Res>  {
   factory $CreateAccountPageStateCopyWith(CreateAccountPageState value, $Res Function(CreateAccountPageState) then) = _$CreateAccountPageStateCopyWithImpl<$Res>;
 $Res call({
- String email, String password
+ String userName, String email, String password
 });
 
 
@@ -59,9 +59,10 @@ class _$CreateAccountPageStateCopyWithImpl<$Res> implements $CreateAccountPageSt
   // ignore: unused_field
   final $Res Function(CreateAccountPageState) _then;
 
-@override $Res call({Object email = freezed,Object password = freezed,}) {
+@override $Res call({Object userName = freezed,Object email = freezed,Object password = freezed,}) {
   return _then(_value.copyWith(
-email: email == freezed ? _value.email : email // ignore: cast_nullable_to_non_nullable
+userName: userName == freezed ? _value.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,email: email == freezed ? _value.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: password == freezed ? _value.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -74,7 +75,7 @@ as String,
 abstract class _$CreateAccountPageStateCopyWith<$Res> implements $CreateAccountPageStateCopyWith<$Res> {
   factory _$CreateAccountPageStateCopyWith(_CreateAccountPageState value, $Res Function(_CreateAccountPageState) then) = __$CreateAccountPageStateCopyWithImpl<$Res>;
 @override $Res call({
- String email, String password
+ String userName, String email, String password
 });
 
 
@@ -89,9 +90,10 @@ class __$CreateAccountPageStateCopyWithImpl<$Res> extends _$CreateAccountPageSta
 @override
 _CreateAccountPageState get _value => super._value as _CreateAccountPageState;
 
-@override $Res call({Object email = freezed,Object password = freezed,}) {
+@override $Res call({Object userName = freezed,Object email = freezed,Object password = freezed,}) {
   return _then(_CreateAccountPageState(
-email: email == freezed ? _value.email : email // ignore: cast_nullable_to_non_nullable
+userName: userName == freezed ? _value.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,email: email == freezed ? _value.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: password == freezed ? _value.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -104,25 +106,25 @@ as String,
 
 /// @nodoc
 class _$_CreateAccountPageState  implements _CreateAccountPageState {
-   _$_CreateAccountPageState({this.email = '', this.password = ''});
+   _$_CreateAccountPageState({this.userName = '', this.email = '', this.password = ''});
 
   
 
-@JsonKey(defaultValue: '') @override  final String email;@JsonKey(defaultValue: '') @override  final String password;
+@JsonKey(defaultValue: '') @override  final String userName;@JsonKey(defaultValue: '') @override  final String email;@JsonKey(defaultValue: '') @override  final String password;
 
 @override
 String toString() {
-  return 'CreateAccountPageState(email: $email, password: $password)';
+  return 'CreateAccountPageState(userName: $userName, email: $email, password: $password)';
 }
 
 
 @override
 bool operator ==(dynamic other) {
-  return identical(this, other) || (other is _CreateAccountPageState&&(identical(other.email, email) || const DeepCollectionEquality().equals(other.email, email))&&(identical(other.password, password) || const DeepCollectionEquality().equals(other.password, password)));
+  return identical(this, other) || (other is _CreateAccountPageState&&(identical(other.userName, userName) || const DeepCollectionEquality().equals(other.userName, userName))&&(identical(other.email, email) || const DeepCollectionEquality().equals(other.email, email))&&(identical(other.password, password) || const DeepCollectionEquality().equals(other.password, password)));
 }
 
 @override
-int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(email)^ const DeepCollectionEquality().hash(password);
+int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(userName)^ const DeepCollectionEquality().hash(email)^ const DeepCollectionEquality().hash(password);
 
 @JsonKey(ignore: true)
 @override
@@ -137,12 +139,12 @@ _$CreateAccountPageStateCopyWith<_CreateAccountPageState> get copyWith => __$Cre
 
 
 abstract class _CreateAccountPageState implements CreateAccountPageState {
-   factory _CreateAccountPageState({ String email,  String password}) = _$_CreateAccountPageState;
+   factory _CreateAccountPageState({ String userName,  String email,  String password}) = _$_CreateAccountPageState;
   
 
   
 
-@override  String get email => throw _privateConstructorUsedError;@override  String get password => throw _privateConstructorUsedError;
+@override  String get userName => throw _privateConstructorUsedError;@override  String get email => throw _privateConstructorUsedError;@override  String get password => throw _privateConstructorUsedError;
 @override @JsonKey(ignore: true)
 _$CreateAccountPageStateCopyWith<_CreateAccountPageState> get copyWith => throw _privateConstructorUsedError;
 

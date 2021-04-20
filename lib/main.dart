@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yournoteapp/app.dart';
 import 'package:yournoteapp/di_container.dart';
 
 import 'app_routes.dart';
-import 'presentation/pages/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,11 @@ class YourNoteApp extends StatelessWidget {
       routes[name] = (context) => AppRoutes.callWidget(name);
     }
     return MultiProvider(
-      providers: [...repositoryProviders, ...useCaseProviders, ...commonProviders],
+      providers: [
+        ...repositoryProviders,
+        ...useCaseProviders,
+        ...commonProviders
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -30,7 +34,7 @@ class YourNoteApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: routes,
-        home: SignInPage.wrapped(),
+        home: App(),
       ),
     );
   }

@@ -29,12 +29,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner:
+  build_runner: ^1.10.11
   json_serializable:
   freezed:
   pedantic_mono:
+
+  # スプラッシュ画面の設定
+  flutter_native_splash:
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+#flutter_native_splash:
+#  color: "#47b0d1"
+#  image: "assets/images/native_splash_icon.png"
