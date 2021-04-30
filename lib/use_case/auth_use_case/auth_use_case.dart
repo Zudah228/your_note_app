@@ -26,38 +26,33 @@ class AuthUseCaseNotifier extends StateNotifier<AuthUseCaseState>
       print('completely signed in');
       await Navigator.pushNamed(context, navigatingRouteName);
     } on FirebaseAuthException catch (e) {
+      await showCommonDialog<void>(context, errorMessageToText(e.toString()),
+          errorMessageToText(e.toString()));
       print(e);
-      await showCommonDialog<void>(
-          context, signInErrorTitle, errorMessageToText(e.toString()));
     } on Exception catch (e) {
+      await showCommonDialog<void>(context, errorMessageToText(e.toString()),
+          errorMessageToText(e.toString()));
       print(e);
-      await showCommonDialog<void>(context, signInErrorTitle, networkErrorContent);
     }
   }
 
-  Future<String> createUserWithEmailAndPassword(BuildContext context,
-      String email, String password) async {
+  Future<String> createUserWithEmailAndPassword(
+      BuildContext context, String email, String password) async {
     try {
       final uid = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       print('completely created');
       return uid;
     } on FirebaseAuthException catch (e) {
+      await showCommonDialog<void>(context, errorMessageToText(e.toString()),
+          errorMessageToText(e.toString()));
       print(e);
-      return '';
+      return 'failed to create account';
     } on Exception catch (e) {
+      await showCommonDialog<void>(context, errorMessageToText(e.toString()),
+          errorMessageToText(e.toString()));
       print(e);
-      return '';
-    }
-  }
-
-  Future<void> sendPasswordSetEmail(BuildContext context, String email) async {
-    try{
-      await _auth.sendPasswordSetEmail(email);
-      print('completely send email');
-      await showCommonDialog<void>(context, sendSetEmailTitle, sendSetEmailContent);
-    }on FirebaseAuthException catch (e) {
-      print(e);
+      return 'failed to create account';
     }
   }
 }

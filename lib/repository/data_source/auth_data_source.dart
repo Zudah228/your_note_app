@@ -19,6 +19,7 @@ class AuthDataSource implements AuthRepository {
   User currentUser = FirebaseAuth.instance.currentUser;
 
   // アカウントの作成
+  // TODO(me): エラーコードをUIに昇華
   @override
   Future<String> createUserWithEmailAndPassword(
       {@required String email, @required String password}) async {
@@ -28,6 +29,7 @@ class AuthDataSource implements AuthRepository {
   }
 
   // サインイン
+  // TODO(me): エラーコードをUIに昇華
   @override
   Future<void> signInWithEmailAndPassword(
       {@required String email, @required String password}) async {
@@ -40,12 +42,5 @@ class AuthDataSource implements AuthRepository {
   Future<void> signOut() async {
     await _auth.signOut();
     print('completely signed out');
-  }
-
-  // パスワード再設定
-  @override
-  Future<void> sendPasswordSetEmail(String email) async {
-    await _auth.sendPasswordResetEmail(email: email);
-
   }
 }

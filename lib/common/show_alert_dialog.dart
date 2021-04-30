@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yournoteapp/presentation/common_widget/alert_dialog/alert_dialog.dart';
+import 'package:yournoteapp/presentation/common_widget/alert_dialog.dart';
 
 Future<T> showAlertDialog<T>(
     BuildContext context, String title, String content) {

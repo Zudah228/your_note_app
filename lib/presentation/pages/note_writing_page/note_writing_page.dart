@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:yournoteapp/common/show_alert_dialog/show_alert_dialog.dart';
+import 'package:yournoteapp/common/show_alert_dialog.dart';
 import 'package:yournoteapp/repository/auth_repository.dart';
 import 'package:yournoteapp/use_case/database_use_case/database_use_case.dart';
 

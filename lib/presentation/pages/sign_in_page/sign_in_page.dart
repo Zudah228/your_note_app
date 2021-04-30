@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:yournoteapp/app_routes.dart';
-import 'package:yournoteapp/presentation/common_widget/index.dart';
 import 'package:yournoteapp/presentation/pages/sign_in_page/sign_in_page_state.dart';
-import 'package:yournoteapp/repository/database_repository.dart';
 import 'package:yournoteapp/use_case/auth_use_case/auth_use_case.dart';
 
 class SignInPage extends StatelessWidget {
@@ -14,7 +12,7 @@ class SignInPage extends StatelessWidget {
       providers: [
         StateNotifierProvider<SignInPageNotifier, SignInPageState>(
           create: (context) =>
-              SignInPageNotifier(context.read<DatabaseRepository>()),
+              SignInPageNotifier(),
         )
       ],
       child: SignInPage(),
@@ -26,77 +24,59 @@ class SignInPage extends StatelessWidget {
     final _viewModel = _ViewModel.fromStateNotifier(context);
     final _auth = context.watch<AuthUseCaseNotifier>();
     final theme = Theme.of(context);
-    // キーボードが表示されると上にスクロールされるように
-    final _bottomSpace = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        reverse: true,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 30, 30, _bottomSpace),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 50),
-              SizedBox(
-                  height: 150,
-                  width: 150,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    child: Image.asset(
-                      'assets/images/app_icon.png',
-                      height: 150,
-                      width: 150,
-                    ),
+      appBar: AppBar(
+        title: const Text('サインイン'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    'assets/images/app_icon.png',
+                    fit: BoxFit.contain,
                   )),
-              const SizedBox(height: 30),
-              Text(
-                'ようこそ！',
-                style: TextStyle(
-                    color: theme.primaryColor,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800),
-              ),
-              const SizedBox(height: 50),
-              SigningPageTextField(
-                onChanged: _viewModel.emailOnChanged,
-                textInputType: TextInputType.emailAddress,
-                fieldName: 'メールアドレス',
-              ),
-              SigningPageTextField(
-                onChanged: _viewModel.passwordOnChanged,
-                obscureText: _viewModel.obscurePasswordText,
-                fieldName: 'パスワード',
-                displayPasswordHelpButton: true,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: () async {
-                      await _auth.signInWithEmailAndPassword(_viewModel.email,
-                          _viewModel.password, context, AppRoutes.home);
-                    },
-                    style: WidgetStyle.kButtonStyle(context),
-                    child: const Text(
-                      'サインイン',
-                      style: WidgetStyle.kSigningPageButtonTextStyle,
-                    )),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              RichText(
-                  text: TextSpan(
-                      text: 'アカウントを持っていない方はこちら',
-                      style: TextStyle(color: theme.primaryColor),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.pushNamed(
-                            context, AppRoutes.createAccount))),
-              const SizedBox(
-                height: 35,
-              )
-            ],
-          ),
+            ),
+            _TextField(
+              onChanged: _viewModel.emailOnChanged,
+              textInputType: TextInputType.emailAddress,
+              obscureText: false,
+              fieldName: 'email',
+            ),
+            _TextField(
+              onChanged: _viewModel.passwordOnChanged,
+              obscureText: _viewModel.obscurePasswordText,
+              fieldName: 'password',
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _auth.signInWithEmailAndPassword(_viewModel.email,
+                      _viewModel.password, context, AppRoutes.home);
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(theme.primaryColor)),
+                child: const Text('サインイン')),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+                text: TextSpan(
+                    text: 'アカウントを持っていない方はこちら',
+                    style: TextStyle(color: theme.primaryColor),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Navigator.pushNamed(
+                          context, AppRoutes.createAccount)))
+          ],
         ),
       ),
     );
@@ -122,4 +102,33 @@ class _ViewModel {
   final bool obscurePasswordText;
   final void Function(String) emailOnChanged;
   final void Function(String) passwordOnChanged;
+}
+
+class _TextField extends StatelessWidget {
+  const _TextField(
+      {Key key,
+      this.onChanged,
+      this.fieldName,
+      this.textInputType,
+      this.obscureText})
+      : super(key: key);
+
+  final Function(String) onChanged;
+  final String fieldName;
+  final TextInputType textInputType;
+  final bool obscureText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          onChanged: onChanged,
+          keyboardType: textInputType,
+          obscureText: obscureText,
+          decoration: InputDecoration(counterText: fieldName),
+        ),
+      ],
+    );
+  }
 }

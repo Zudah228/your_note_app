@@ -2,7 +2,6 @@ import 'dart:core';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_notifier/state_notifier.dart';
-import 'package:yournoteapp/common/helper/from_document.dart';
 import 'package:yournoteapp/repository/database_repository.dart';
 
 part 'sign_in_page_state.freezed.dart';
@@ -17,13 +16,7 @@ class SignInPageState with _$SignInPageState {
 }
 
 class SignInPageNotifier extends StateNotifier<SignInPageState> {
-  SignInPageNotifier(this._databaseRepository) : super(SignInPageState()) {
-    _databaseRepository
-        .getAppData('icon')
-        .then((value) => state = state.copyWith(iconURL: fromDocumentToList(value)));
-  }
-
-  final DatabaseRepository _databaseRepository;
+  SignInPageNotifier() : super(SignInPageState());
 
   void emailOnChanged(String email) {
     state = state.copyWith(

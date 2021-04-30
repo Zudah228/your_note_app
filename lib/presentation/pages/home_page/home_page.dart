@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
       providers: [
         StateNotifierProvider<HomePageNotifier, HomePageState>(
           create: (context) => HomePageNotifier(
-              authRepository: context.read<AuthRepository>(),
               databaseRepository: context.read<DatabaseRepository>()),
         )
       ],
@@ -43,10 +42,6 @@ class HomePage extends StatelessWidget {
           },
         ),
         leadingWidth: 200,
-        actions: [Padding(
-          padding: const EdgeInsets.all(18),
-          child: Text('${_viewModel.currentUserData.name}さん'),
-        )],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -82,8 +77,13 @@ class _ListTile extends StatelessWidget {
       children: [
         ListTile(
             title: Text(note.title == '' ? 'タイトルなし' : note.title),
-            subtitle: Text(note.description == '' ? '本文なし' : note.description,
-                maxLines: 10)),
+            subtitle: Text(
+              note.description.length >= 10
+                  ? '${note.description.substring(0, 20)}...'
+                  : note.description == ''
+                      ? '本文なし'
+                      : note.description,
+            )),
         const Divider(
           height: 2,
         ),
@@ -93,13 +93,11 @@ class _ListTile extends StatelessWidget {
 }
 
 class _ViewModel {
-  _ViewModel(this.notes, this.currentUserData);
+  _ViewModel(this.notes);
 
   _ViewModel.fromStateNotifier(BuildContext context)
-      : currentUserData = context.select<HomePageState, User>((state) => state.user),
-        notes =
+      : notes =
             context.select<HomePageState, List<Note>>((state) => state.notes);
 
-  final User currentUserData;
   final List<Note> notes;
 }

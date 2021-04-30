@@ -5,6 +5,7 @@ import 'package:yournoteapp/app.dart';
 import 'package:yournoteapp/di_container.dart';
 
 import 'app_routes.dart';
+import 'presentation/pages/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +21,7 @@ class YourNoteApp extends StatelessWidget {
       routes[name] = (context) => AppRoutes.callWidget(name);
     }
     return MultiProvider(
-      providers: [
-        ...repositoryProviders,
-        ...useCaseProviders,
-        ...commonProviders
-      ],
+      providers: [...repositoryProviders, ...useCaseProviders, ...commonProviders],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

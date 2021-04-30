@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError('It seems like you constru
 class _$HomePageStateTearOff {
   const _$HomePageStateTearOff();
 
-_HomePageState call({ User user = null,  List<Note> notes = const <Note>[]}) {
-  return  _HomePageState(user:user,notes:notes,);
+_HomePageState call({ List<Note> notes = const <Note>[]}) {
+  return  _HomePageState(notes:notes,);
 }
 
 }
@@ -28,7 +28,7 @@ const $HomePageState = _$HomePageStateTearOff();
 /// @nodoc
 mixin _$HomePageState {
 
- User get user => throw _privateConstructorUsedError; List<Note> get notes => throw _privateConstructorUsedError;
+ List<Note> get notes => throw _privateConstructorUsedError;
 
 
 
@@ -44,7 +44,7 @@ $HomePageStateCopyWith<HomePageState> get copyWith => throw _privateConstructorU
 abstract class $HomePageStateCopyWith<$Res>  {
   factory $HomePageStateCopyWith(HomePageState value, $Res Function(HomePageState) then) = _$HomePageStateCopyWithImpl<$Res>;
 $Res call({
- User user, List<Note> notes
+ List<Note> notes
 });
 
 
@@ -59,10 +59,9 @@ class _$HomePageStateCopyWithImpl<$Res> implements $HomePageStateCopyWith<$Res> 
   // ignore: unused_field
   final $Res Function(HomePageState) _then;
 
-@override $Res call({Object user = freezed,Object notes = freezed,}) {
+@override $Res call({Object notes = freezed,}) {
   return _then(_value.copyWith(
-user: user == freezed ? _value.user : user // ignore: cast_nullable_to_non_nullable
-as User,notes: notes == freezed ? _value.notes : notes // ignore: cast_nullable_to_non_nullable
+notes: notes == freezed ? _value.notes : notes // ignore: cast_nullable_to_non_nullable
 as List<Note>,
   ));
 }
@@ -74,7 +73,7 @@ as List<Note>,
 abstract class _$HomePageStateCopyWith<$Res> implements $HomePageStateCopyWith<$Res> {
   factory _$HomePageStateCopyWith(_HomePageState value, $Res Function(_HomePageState) then) = __$HomePageStateCopyWithImpl<$Res>;
 @override $Res call({
- User user, List<Note> notes
+ List<Note> notes
 });
 
 
@@ -89,10 +88,9 @@ class __$HomePageStateCopyWithImpl<$Res> extends _$HomePageStateCopyWithImpl<$Re
 @override
 _HomePageState get _value => super._value as _HomePageState;
 
-@override $Res call({Object user = freezed,Object notes = freezed,}) {
+@override $Res call({Object notes = freezed,}) {
   return _then(_HomePageState(
-user: user == freezed ? _value.user : user // ignore: cast_nullable_to_non_nullable
-as User,notes: notes == freezed ? _value.notes : notes // ignore: cast_nullable_to_non_nullable
+notes: notes == freezed ? _value.notes : notes // ignore: cast_nullable_to_non_nullable
 as List<Note>,
   ));
 }
@@ -104,25 +102,25 @@ as List<Note>,
 
 /// @nodoc
 class _$_HomePageState  implements _HomePageState {
-   _$_HomePageState({this.user = null, this.notes = const <Note>[]});
+   _$_HomePageState({this.notes = const <Note>[]});
 
   
 
-@JsonKey(defaultValue: null) @override  final User user;@JsonKey(defaultValue: const <Note>[]) @override  final List<Note> notes;
+@JsonKey(defaultValue: const <Note>[]) @override  final List<Note> notes;
 
 @override
 String toString() {
-  return 'HomePageState(user: $user, notes: $notes)';
+  return 'HomePageState(notes: $notes)';
 }
 
 
 @override
 bool operator ==(dynamic other) {
-  return identical(this, other) || (other is _HomePageState&&(identical(other.user, user) || const DeepCollectionEquality().equals(other.user, user))&&(identical(other.notes, notes) || const DeepCollectionEquality().equals(other.notes, notes)));
+  return identical(this, other) || (other is _HomePageState&&(identical(other.notes, notes) || const DeepCollectionEquality().equals(other.notes, notes)));
 }
 
 @override
-int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(user)^ const DeepCollectionEquality().hash(notes);
+int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(notes);
 
 @JsonKey(ignore: true)
 @override
@@ -137,12 +135,12 @@ _$HomePageStateCopyWith<_HomePageState> get copyWith => __$HomePageStateCopyWith
 
 
 abstract class _HomePageState implements HomePageState {
-   factory _HomePageState({ User user,  List<Note> notes}) = _$_HomePageState;
+   factory _HomePageState({ List<Note> notes}) = _$_HomePageState;
   
 
   
 
-@override  User get user => throw _privateConstructorUsedError;@override  List<Note> get notes => throw _privateConstructorUsedError;
+@override  List<Note> get notes => throw _privateConstructorUsedError;
 @override @JsonKey(ignore: true)
 _$HomePageStateCopyWith<_HomePageState> get copyWith => throw _privateConstructorUsedError;
 

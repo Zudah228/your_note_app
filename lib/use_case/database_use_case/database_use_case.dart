@@ -19,10 +19,9 @@ class DatabaseUseCaseNotifier extends StateNotifier<DatabaseUseCaseState>
 
   DatabaseRepository get _database => read<DatabaseRepository>();
 
-  Future<void> addUser(String uid, String userName, String email) async {
+  Future<void> addUser(String uid, String email) async {
     await _database.addUser(uid, User(
       uid: uid,
-      name: userName,
       email: email,
       createAt: DateTime.now()
     ));
