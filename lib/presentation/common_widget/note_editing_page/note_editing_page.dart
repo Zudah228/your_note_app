@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'note_editing_page_state.dart';
 
 class NoteEditing extends StatelessWidget {
+  const NoteEditing(
+      {Key key,
+      this.isChanged,
+      this.pageTitle,
+      this.buttonText,
+      this.onPressedTextButton,
+      this.appBarLeading})
+      : super(key: key);
+  final bool isChanged;
   final String pageTitle;
   final String buttonText;
   final Future<void> onPressedTextButton;
@@ -8,6 +20,7 @@ class NoteEditing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _viewModel = _ViewModel.fromStateNotifier(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTitle),
@@ -39,8 +52,7 @@ class NoteEditing extends StatelessWidget {
           children: [
             TextField(
               maxLines: 1,
-              style:
-              const TextStyle(fontSize: 45, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 45, fontWeight: FontWeight.w700),
               decoration: const InputDecoration(
                   border: InputBorder.none, hintText: 'タイトルなし'),
               onChanged: _viewModel.titleOnChanged,
@@ -66,7 +78,7 @@ class _ViewModel {
 
   _ViewModel.fromStateNotifier(BuildContext context)
       : isChanged = context
-      .select<NoteEditingPageState, bool>((state) => state.isChanged),
+            .select<NoteEditingPageState, bool>((state) => state.isChanged),
         title = context
             .select<NoteEditingPageState, String>((state) => state.title),
         description = context

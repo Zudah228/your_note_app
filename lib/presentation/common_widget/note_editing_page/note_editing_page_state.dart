@@ -15,9 +15,9 @@ class NoteEditingPageState with _$NoteEditingPageState {
         @Default('') String description}) = _NoteEditingPageState;
 }
 
-class NoteWritingPageNotifier extends StateNotifier<NoteEditingPageState>
+class NoteEditingPageNotifier extends StateNotifier<NoteEditingPageState>
     with LocatorMixin {
-  NoteWritingPageNotifier(this.databaseRepository, this.noteId)
+  NoteEditingPageNotifier(this.databaseRepository, this.noteId)
       : super(NoteEditingPageState()) {
     databaseRepository.notesStream.listen((QuerySnapshot snapshot) {
       snapshot.docs.map((doc) {

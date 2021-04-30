@@ -19,16 +19,37 @@ class DatabaseUseCaseNotifier extends StateNotifier<DatabaseUseCaseState>
 
   DatabaseRepository get _database => read<DatabaseRepository>();
 
-  Future<void> addUser(String uid, String email) async {
-    await _database.addUser(uid, User(
-      uid: uid,
-      email: email,
-      createAt: DateTime.now()
-    ));
-    print('add user profile to Firestore');
+  Future<void> addUser(BuildContext context, String uid, String email) async {
+    try {
+      await _database.addUser(
+          uid, User(uid: uid, email: email, createAt: DateTime.now()));
+      print('add user profile to Firestore');
+    } on FirebaseException catch (e) {
+      print(e);
+      await showCommonDialog<void>(
+          context, '送信に失敗', errorMessageToText(e.message));
+    } on Exception catch (e) {
+      print(e);
+      await showCommonDialog<void>(
+          context, '送信に失敗', errorMessageToText(e.toString()));
+    }
   }
 
-  Future<void> setNote(BuildContext context, String uid, String title, String description) async {
+  Future<void> deleteNote(BuildContext context, String noteId) async {
+    try {
+      await _database.deleteData('notes', noteId);
+      print('delete note id:$noteId');
+    } on FirebaseException catch (e) {
+      print(e);
+      await showCommonDialog<void>(context, '通信に失敗しました', errorMessageToText(e.code));
+    } on Exception catch (e) {
+      print(e);
+      await showCommonDialog<void>(context, '通信に失敗しました', errorMessageToText(e.toString()));
+    }
+  }
+
+  Future<void> setNote(BuildContext context, String uid, String title,
+      String description) async {
     try {
       await _database.setNote(
           uid,
@@ -38,11 +59,12 @@ class DatabaseUseCaseNotifier extends StateNotifier<DatabaseUseCaseState>
               updateAt: DateTime.now()));
       Navigator.pop(context);
     } on FirebaseException catch (e) {
-      await showCommonDialog<void>(context, noteSaveErrorTitle, e.toString());
       print(e);
+      await showCommonDialog<void>(
+          context, noteSaveErrorTitle, errorMessageToText(e.code));
     } on Exception catch (e) {
-      await showCommonDialog<void>(context, title, e.toString());
       print(e);
+      await showCommonDialog<void>(context, title, e.toString());
     }
   }
 }

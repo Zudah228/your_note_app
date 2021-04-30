@@ -7,7 +7,6 @@ import 'package:yournoteapp/domain/user.dart';
 abstract class DatabaseRepository {
   Stream<QuerySnapshot> get notesStream;
   Stream<DocumentSnapshot> get currentUserData;
-  Future<DocumentSnapshot> getAppData(String path);
   Future<bool> hasSignedIn(String uid);
   Future<void> setNote( String uid, Note note);
   Future<void> addUser(String uid, User user);

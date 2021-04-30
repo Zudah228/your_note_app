@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:yournoteapp/app_routes.dart';
-import 'package:yournoteapp/repository/database_repository.dart';
-import 'package:yournoteapp/repository/index.dart';
+import 'package:yournoteapp/common/index.dart';
+import 'package:yournoteapp/presentation/common_widget/index.dart';
 import 'package:yournoteapp/use_case/auth_use_case/auth_use_case.dart';
 import 'package:yournoteapp/use_case/database_use_case/database_use_case.dart';
 
@@ -38,27 +38,34 @@ class CreateAccountPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _TextField(
+            SigningTextField(
               onChanged: _viewModel.emailOnChanged,
-              fieldName: 'email',
+              fieldName: 'メールアドレス',
+              textInputType: TextInputType.emailAddress,
             ),
-            _TextField(
+            SigningTextField(
               onChanged: _viewModel.passwordOnChanged,
-              fieldName: 'password',
+              fieldName: 'パスワード',
+              textInputType: TextInputType.visiblePassword,
+              obscureText: true,
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  await _buttonPressed(
-                    context: context,
-                    email: _viewModel.email,
-                    password: _viewModel.password,
-                    auth: _auth,
-                  );
-                },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor)),
-                child: const Text('登録'))
+            const SizedBox(
+              height: 5,
+            ),
+            SigningElevatedButton(
+              onPressed: () async {
+                await _buttonPressed(
+                  context: context,
+                  email: _viewModel.email,
+                  password: _viewModel.password,
+                  auth: _auth,
+                  database: _database
+                );
+              },
+              childText: '送信',
+              // TODO(me): バリデーション
+              isChanged: true,
+            )
           ],
         ),
       ),
@@ -67,16 +74,17 @@ class CreateAccountPage extends StatelessWidget {
 }
 
 Future<void> _buttonPressed(
-    {BuildContext context,
-    String email,
-    String password,
-    AuthUseCaseNotifier auth,
-    DatabaseUseCaseNotifier database}) async {
-  final uidOrErrorCode =
+    {@required BuildContext context,
+      @required String email,
+      @required String password,
+      @required AuthUseCaseNotifier auth,
+      @required DatabaseUseCaseNotifier database}) async {
+  final uid =
       await auth.createUserWithEmailAndPassword(context, email, password);
-  if (uidOrErrorCode != 'failed to create account') {
-    await database.addUser(uidOrErrorCode, email);
-    await Navigator.pushNamed(context, AppRoutes.home);
+  if (uid != null) {
+    await database.addUser(context, uid, email);
+    await showCommonDialog<void>(context, '仮登録完了', '確認メールを送信しました。届いたメールのURLを開いて、本登録を完了させてください。');
+    await Navigator.of(context).pushNamed(AppRoutes.signIn);
   }
 }
 
@@ -98,23 +106,4 @@ class _ViewModel {
   final String password;
   final void Function(String) emailOnChanged;
   final void Function(String) passwordOnChanged;
-}
-
-class _TextField extends StatelessWidget {
-  const _TextField({Key key, this.onChanged, this.fieldName}) : super(key: key);
-
-  final Function(String) onChanged;
-  final String fieldName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          onChanged: onChanged,
-          decoration: InputDecoration(counterText: fieldName),
-        ),
-      ],
-    );
-  }
 }

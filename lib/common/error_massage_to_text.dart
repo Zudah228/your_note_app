@@ -1,7 +1,9 @@
 String errorMessageToText(String e) {
   switch (e) {
     case kPasswordTooShort:
-      return 'パスワードは最低6文字必要です';
+      return 'パスワードは最低6文字必要です。';
+    case kEmailAlreadyInUse:
+      return 'そのユーザーはすでに存在しています。';
     case kInvalidPassword:
       return 'そのユーザーは存在しないか、パスワードが違います。';
     case kInvalidUserAddress:
@@ -13,13 +15,16 @@ String errorMessageToText(String e) {
     case kManyRequestFromSameDevice:
       return '同じデバイスから過剰なリクエストがあったのでブロックされました。しばらくしてからまたお試しください。';
     default:
-      return '通信エラーです。';
+      // TODO(me): 問い合わせフォームを作成したら、文言を変更。
+      return '通信エラーです。通信環境を改善してください。';
   }
 }
 
 // CreateAccountのエラー
 const String kPasswordTooShort =
     '[firebase_auth/weak-password] Password should be at least 6 characters';
+const String kEmailAlreadyInUse =
+    '[firebase_auth/email-already-in-use] The email address is already in use by another account.';
 
 // SignInのエラー
 const String kInvalidPassword =

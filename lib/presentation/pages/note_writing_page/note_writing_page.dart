@@ -24,6 +24,7 @@ class NoteWritingPage extends StatelessWidget {
     // TODO(me): タイトル、タグ、内容を入力する場所
     // TODO(me): セキュリティルールを利用して追加
     final _viewModel = _ViewModel.fromStateNotifier(context);
+    final _uid = context.read<AuthRepository>().currentUser.uid;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       onPanDown: (_) => FocusScope.of(context).unfocus(),
@@ -49,6 +50,7 @@ class NoteWritingPage extends StatelessWidget {
               isChanged: _viewModel.isChanged,
               title: _viewModel.title,
               description: _viewModel.description,
+              uid: _uid,
             ),
             const SizedBox(
               width: 20,
@@ -84,17 +86,16 @@ class NoteWritingPage extends StatelessWidget {
 
 class _SaveButton extends StatelessWidget {
   const _SaveButton(
-      {Key key, this.isChanged, this.title, this.description})
-      : super(key: key);
+      {@required this.isChanged, @required this.title, @required this.description, @required this.uid});
 
   final bool isChanged;
+  final String uid;
   final String title;
   final String description;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final _uid = context.read<AuthRepository>().currentUser.uid;
     return Center(
         child: TextButton(
             style: ButtonStyle(
@@ -112,7 +113,7 @@ class _SaveButton extends StatelessWidget {
                 ? () async {
                     await context
                         .read<DatabaseUseCaseNotifier>()
-                        .setNote(context, _uid, title, description);
+                        .setNote(context, uid, title, description);
                   }
                 : null,
             child: Text(

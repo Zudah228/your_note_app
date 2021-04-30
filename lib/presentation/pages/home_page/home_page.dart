@@ -3,8 +3,8 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:yournoteapp/app_routes.dart';
 import 'package:yournoteapp/domain/index.dart';
-import 'package:yournoteapp/repository/auth_repository.dart';
 import 'package:yournoteapp/repository/database_repository.dart';
+import 'package:yournoteapp/use_case/index.dart';
 
 import 'home_page_state.dart';
 
@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _viewModel = _ViewModel.fromStateNotifier(context);
+    final _database = context.watch<DatabaseUseCaseNotifier>();
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -37,8 +38,7 @@ class HomePage extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () async {
-            await context.read<AuthRepository>().signOut();
-            Navigator.pop(context);
+            await context.read<AuthUseCaseNotifier>().signOut(context);
           },
         ),
         leadingWidth: 200,
@@ -51,7 +51,8 @@ class HomePage extends StatelessWidget {
               child: ListView.builder(
                   itemCount: _viewModel.notes.length,
                   itemBuilder: (context, index) {
-                    return _ListTile(note: _viewModel.notes[index]);
+                    final note = _viewModel.notes[index];
+                    return _ListTile(note: note);
                   }),
             ),
           ],
@@ -78,7 +79,7 @@ class _ListTile extends StatelessWidget {
         ListTile(
             title: Text(note.title == '' ? 'タイトルなし' : note.title),
             subtitle: Text(
-              note.description.length >= 10
+              note.description.length >= 20
                   ? '${note.description.substring(0, 20)}...'
                   : note.description == ''
                       ? '本文なし'

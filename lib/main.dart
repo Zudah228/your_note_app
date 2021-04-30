@@ -5,7 +5,6 @@ import 'package:yournoteapp/app.dart';
 import 'package:yournoteapp/di_container.dart';
 
 import 'app_routes.dart';
-import 'presentation/pages/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,7 @@ class YourNoteApp extends StatelessWidget {
     return MultiProvider(
       providers: [...repositoryProviders, ...useCaseProviders, ...commonProviders],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: ' Your Note App',
         theme: ThemeData(
           primaryColor: const Color(0xFF47B0D1),
           primaryColorBrightness: Brightness.dark,
