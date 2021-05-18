@@ -8,10 +8,11 @@
 - Flutter 2.0に慣れる
 - CIの導入
 - 整理されたアーキテクチャで運用する
-- リリース作業
+- 自分でリリース作業
 
 ### v1.1
 - tagの実装
+- StateNotifierからRiverPodに変更
 
 ### v2.0
 - マークダウンを採用する
@@ -28,6 +29,7 @@
 ```
 # Flutter
 2.0.3
+状態管理：StateNotifier
 
 # Dart
 2.9.1
@@ -39,4 +41,7 @@
 開発環境: -
 ステージング環境: -
 本番環境: com.zudah.yourNoteApp
+
+# CI
+CodeMagic
 ```
