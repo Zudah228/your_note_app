@@ -35,6 +35,7 @@ CodeMagic
 
 ### v1.1
 - tagの実装
+- ページルートの設定
 - StateNotifierからRiverPodに変更
 
 ### v2.0
