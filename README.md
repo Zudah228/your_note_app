@@ -2,6 +2,29 @@
 メモアプリ
 <br>
 <br>
+## 環境
+```
+# Flutter
+2.0.5
+バージョン管理ツール：asdf
+状態管理：StateNotifier
+
+# Dart
+2.9.1
+
+# CocoaPods
+1.10.1
+
+# Bundle ID
+開発環境: -
+ステージング環境: -
+本番環境: com.zudah.yourNoteApp
+
+# CI
+CodeMagic
+```
+
+
 ## 達成目標
 ### v1.0
 - Firebaseのセキュリティルールの習得
@@ -24,24 +47,3 @@
 - できるだけ最新のFlutterのバージョンにキャッチアップする（最新にしない時は、その理由を明確にする）  
 <br>
 <br>
-
-## 環境
-```
-# Flutter
-2.0.3
-状態管理：StateNotifier
-
-# Dart
-2.9.1
-
-# CocoaPods
-1.10.1
-
-# Bundle ID
-開発環境: -
-ステージング環境: -
-本番環境: com.zudah.yourNoteApp
-
-# CI
-CodeMagic
-```
